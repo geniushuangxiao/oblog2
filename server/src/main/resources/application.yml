@@ -1,11 +1,12 @@
 server:
   port: 80
+spring:
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:h2:file:~/DBFile/dbf;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;DB_CLOSE_ON_EXIT=FALSE #当前用户目录，文件前缀为dbf
+    url: jdbc:h2:file:~/DBFile/dbf;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;DB_CLOSE_ON_EXIT=FALSE #褰撳墠鐢ㄦ埛鐩綍锛屾枃浠跺墠缂�涓篸bf
     driver-class-name: org.h2.Driver
 security:
   ignored:
@@ -14,11 +15,11 @@ mail:
   server:
     host: smtp.163.com
     port: 25
-    username:   #发件人邮箱名
-    password:   #发件人邮箱授权码
+    username:   #鍙戜欢浜洪偖绠卞悕
+    password:   #鍙戜欢浜洪偖绠辨巿鏉冪爜
   send:
-    url:  #域名或ip地址
-    from:   #发件人地址
+    url:  #鍩熷悕鎴杋p鍦板潃
+    from:   #鍙戜欢浜哄湴鍧�
 default:
   admin:
     username: root
