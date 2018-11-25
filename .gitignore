@@ -3,13 +3,11 @@
 *.iws
 *.iml
 *.ipr
-back-end/target
 server/target
-back-end/dyd.oblog.iml
 server/server.iml
 
 ### Maven ###
-back-end/.mvn
+server/.mvn
 
 ### Angular ###
 ui/dist
@@ -25,9 +23,6 @@ ui/out-tsc
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-# IDE - IDEA
-.idea
 
 # misc
 .sass-cache
