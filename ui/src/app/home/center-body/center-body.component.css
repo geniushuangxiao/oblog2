@@ -8,6 +8,19 @@
     height: 400px;
 }
 
+.img-info {
+    position: relative;
+    top: 320px;
+    display: block;
+    font-size: 26px;
+    color: #FFF;
+    background: rgba(0,0,0,.4);
+    padding: 0 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .left {
     width: 73%;
     margin-top: 20px;
