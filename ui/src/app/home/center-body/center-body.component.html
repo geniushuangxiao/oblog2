@@ -1,0 +1,38 @@
+<div style="background-color: #efefef;">
+  <div class="first-line">
+    <div>
+    </div>
+    <div class="menu">
+      <nz-timeline>
+        <nz-timeline-item>Create a services site<br> 2015-09-01</nz-timeline-item>
+        <nz-timeline-item>Solve initial network problems<br> 2015-09-01</nz-timeline-item>
+        <nz-timeline-item nzColor="red" [nzDot]="dotTemplate">Technical testing<br> 2015-09-01</nz-timeline-item>
+        <nz-timeline-item>Network problems being solved<br> 2015-09-01</nz-timeline-item>
+      </nz-timeline>
+      <ng-template #dotTemplate>
+        <i nz-icon type="clock-circle-o" style="font-size: 16px;"></i>
+      </ng-template>
+    </div>
+  </div>
+  <div class="left">
+    <div *ngFor="let n of [1,2,3,4,5,6]" class="card-blogs">
+      <nz-card nzTitle="Card title">
+        <!-- 博文图片 -->
+        <div class="blog-img-div">
+          <img style="max-width: 150px; max-height: 150px;" src="../../../assets/img/荷兰2.jpg">
+        </div>
+        <div class="blog-summary-div">
+          <!-- 博文简介 -->
+          <div class="blog-summary-text-div">这篇博文的摘要部分</div>
+          <!-- 博文作者、分类、日期、阅读量 -->
+          <div class="blog-summary-icon-div">
+              <i nz-icon type="user" theme="outline"></i>10
+              <i nz-icon type="tag" theme="outline"></i>Java基础
+              <i nz-icon type="dashboard" theme="outline"></i>2018-11-17 11:12:00
+              <i nz-icon type="eye" theme="outline"></i>1000
+          </div>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+</div>

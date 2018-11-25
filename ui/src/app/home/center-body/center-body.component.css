@@ -1,0 +1,54 @@
+.first-line {
+    overflow:hidden;
+}
+
+.first-line > div:first-child {
+    background: url(../../../assets/img/荷兰1.jpg);
+    width: 73%;
+    height: 400px;
+}
+
+.left {
+    width: 73%;
+    margin-top: 20px;
+}
+
+.menu {
+    background-color: white;
+    width: 22%;
+    height: 83%;
+    position: fixed;
+    top: 80px;
+    right: 8%;
+    padding: 10px;
+}
+
+.card-blogs {
+    margin-bottom: 10px;
+}
+.card-blogs:before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 36px;
+    background: #1890ff;
+    z-index: 666;
+}
+
+/* 博客图片div */
+.blog-img-div {
+    display: inline-block;
+}
+
+/* 博客摘要div */
+.blog-summary-div {
+    display: inline-block;
+    margin-left: 20px;
+}
+/* 摘要图标div */
+.blog-summary-icon-div {
+    margin-top: 10px;
+}
+.blog-summary-icon-div > i {
+    margin-left: 10px;
+}

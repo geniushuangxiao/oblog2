@@ -1,0 +1,16 @@
+/* 菜单高度 */
+ul {
+    height: 60px;
+}
+/* 网站标题字体调大 */
+ul > li:first-child {
+    font-size: 22px !important;
+    margin-left: 50px !important;
+}
+/* 菜单高度 & 字体 */
+ul > li {
+    font-size: 16px;
+    height: 60px;
+    line-height: 60px !important;
+    margin-left: 4px;
+}
