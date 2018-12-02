@@ -14,6 +14,15 @@ public class HelloRouter {
     public RouterFunction<ServerResponse> route(HelloHandler helloHandler) {
 
         return RouterFunctions
-                .route(RequestPredicates.GET("/hello").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), helloHandler::hello);
+                .route(RequestPredicates.GET("/hello").and(
+                        RequestPredicates.accept(MediaType.TEXT_PLAIN)), helloHandler::hello);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> indexRoute(HelloHandler helloHandler) {
+        return RouterFunctions.route(
+                RequestPredicates.GET("/").and(
+                        RequestPredicates.accept(MediaType.ALL)), helloHandler::forwardIndex);
+
     }
 }

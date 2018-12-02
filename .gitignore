@@ -5,12 +5,13 @@
 *.ipr
 server/target
 server/server.iml
+**/resources/static
+**/resources/static/
 
 ### Maven ###
 server/.mvn
 
 ### Angular ###
-ui/dist
 ui/node_modules
 ui/dist
 ui/dist-server
