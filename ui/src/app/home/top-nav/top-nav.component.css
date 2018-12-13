@@ -14,3 +14,10 @@ ul > li {
     line-height: 60px !important;
     margin-left: 4px;
 }
+
+a {
+    float: right;
+    height: 60px;
+    line-height: 60px;
+    padding: 0px 5px;
+}

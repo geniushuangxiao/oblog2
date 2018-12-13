@@ -1,6 +1,8 @@
 server:
   port: 80
 spring:
+  profiles:
+    default: pro  #默认生产环境
   jpa:
     show-sql: true
     hibernate:
@@ -8,6 +10,9 @@ spring:
   datasource:
     url: jdbc:h2:file:~/DBFile/dbf;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;DB_CLOSE_ON_EXIT=FALSE #当前用户目录，文件前缀为dbf
     driver-class-name: org.h2.Driver
+security:
+  ignored:
+  - "*.bundle.*"
 mail:
   server:
     host: smtp.163.com
@@ -22,8 +27,3 @@ default:
     username: root
     password: root
     email: root@root.com
-
-app:
-  lettuce:
-    ip: 127.0.0.1
-    port: 6379
