@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let creds = this.validateForm.value;
+    let creds = new FormData();
+    creds.append("username", this.validateForm.value.username);
+    creds.append("password", this.validateForm.value.password);
     this.user.login(creds);
   }
 

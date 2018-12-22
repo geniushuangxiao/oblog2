@@ -5,5 +5,20 @@
 
   <a *ngIf="!user.authenticated()" routerLink="/register">注册</a>
   <a *ngIf="!user.authenticated()" routerLink="/login">登录</a>
-  <a *ngIf="user.authenticated()">{{user.userName()}}</a>
+  <!-- 登陆用户操作菜单 -->
+  <a *ngIf="user.authenticated()">
+    <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
+    </nz-avatar>
+    <i nz-icon type="caret-down" theme="outline" nz-popover [nzTitle]="user.userName()" [nzContent]="contentTemplate" nzPlacement="bottomRight"></i>
+    <ng-template #contentTemplate>
+      <div>
+        <p>Content</p>
+        <p>Content</p>
+      </div>
+    </ng-template>
+  </a>
+  <!-- 登陆用户的消息 -->
+  <a *ngIf="user.authenticated()">
+    <nz-avatar nzIcon="bell"></nz-avatar>10
+  </a>
 </ul>
