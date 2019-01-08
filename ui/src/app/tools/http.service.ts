@@ -6,19 +6,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HttpService {
   baseUrl = "/api/";
-  // baseUrl = "api/";
   constructor(private http: HttpClient) { }
   get(url: string) {
     return this.http.get(this.baseUrl + url);
   }
   post(url: string, body: any) {
     return this.http.post(this.baseUrl + url, body);
-  }
-  login(obj: any) {
-    return this.http.post("/login", obj);
-  }
-  logout() {
-    return this.http.post('logout', {});
   }
   delete(url: string, params: any) {
     let options: any = {};

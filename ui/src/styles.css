@@ -2,3 +2,10 @@
 .ant-card-bordered {
     border: none;
 }
+
+.page-bottom-button-group {
+    text-align: center;
+}
+.page-bottom-button-group > button {
+    margin: 5px;
+}

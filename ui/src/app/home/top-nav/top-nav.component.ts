@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../tools/user.service';
+import { TopNavService } from './top-nav.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -8,9 +9,12 @@ import { UserService } from '../../tools/user.service';
 })
 export class TopNavComponent implements OnInit {
 
-  constructor(public user: UserService) { }
+  constructor(private topNavService: TopNavService,
+    public user: UserService) { }
 
   ngOnInit() {
+    //初始化菜单数据
+    this.topNavService.queryCategory();
   }
 
 }

@@ -13,14 +13,14 @@ export class UserService {
   }
 
   login(creds) {
-    this.http.login(creds).subscribe(res => {
+    this.http.post("login", creds).subscribe(res => {
       this.user();
       this.router.navigate(["/home"]);
     });
   }
 
   logout() {
-    this.http.logout().subscribe();
+    this.http.post('logout', {}).subscribe();
     this.user();
   }
 

@@ -1,7 +1,6 @@
 <ul nz-menu [nzMode]="'horizontal'">
   <li nz-menu-item href="/home">TechTopic</li>
-  <li nz-menu-item>博客分类</li>
-  <li nz-menu-item>视频分类</li>
+  <li *ngFor="let category of topNavService.categories" nz-menu-item>{{category.label}}</li>
 
   <a *ngIf="!user.authenticated()" routerLink="/register">注册</a>
   <a *ngIf="!user.authenticated()" routerLink="/login">登录</a>

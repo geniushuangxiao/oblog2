@@ -5,6 +5,7 @@ import com.summer.xblog.dto.CommonDTO;
 import com.summer.xblog.entity.Blog;
 import com.summer.xblog.service.BlogService;
 import com.summer.xblog.service.CardService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/blog")
+@Slf4j
 public class BlogController {
-    private static final Logger log = LoggerFactory.getLogger(BlogController.class);
     @Autowired
     private BlogRepository repository;
     @Autowired

@@ -21,8 +21,9 @@ public class ProSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/swagger-ui.html").authenticated()
                 .anyRequest().permitAll().and()
-                .formLogin().loginPage("/login").permitAll().successHandler(successHandler).failureHandler(failHandler)
-                .and().sessionManagement().maximumSessions(1).expiredUrl("/login");
+                .formLogin().loginPage("/api/login").permitAll().successHandler(successHandler).failureHandler(failHandler).and()
+                .logout().logoutUrl("/api/logout").and()
+                .sessionManagement().maximumSessions(1).expiredUrl("/api/login");
         http.csrf().disable().headers().frameOptions().sameOrigin();    //iframe同源允许链接
         http.cors().disable();
     }
