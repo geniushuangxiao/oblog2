@@ -1,0 +1,6 @@
+<div class="one-category" *ngFor="let category of parentCategory.children">
+  <h3>{{category.label}}</h3>
+  <ul>
+    <li *ngFor="let child of category.children">{{child.label}}</li>
+  </ul>
+</div>

@@ -16,6 +16,7 @@ import { TopNavComponent } from './home/top-nav/top-nav.component';
 import { CenterBodyComponent } from './home/center-body/center-body.component';
 import { LoginComponent } from './user/login/login.component';
 import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
+import { TopNavFlyoutComponent } from './home/top-nav-flyout/top-nav-flyout.component';
 
 registerLocaleData(zh);
 
@@ -26,7 +27,8 @@ registerLocaleData(zh);
     TopNavComponent,
     CenterBodyComponent,
     LoginComponent,
-    BlogEditComponent
+    BlogEditComponent,
+    TopNavFlyoutComponent
   ],
   imports: [
     BrowserModule,

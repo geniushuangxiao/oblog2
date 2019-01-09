@@ -21,3 +21,12 @@ a {
     line-height: 60px;
     padding: 0px 5px;
 }
+
+.nav-flyout {
+    position: fixed;
+    top: 62px;
+    left: 0px;
+    right: 0px;
+    background-color: white;
+    z-index: 999;
+}

@@ -8,6 +8,7 @@ import { TopNavService } from './top-nav.service';
   styleUrls: ['./top-nav.component.css']
 })
 export class TopNavComponent implements OnInit {
+  mouseOverCategory: any;
 
   constructor(private topNavService: TopNavService,
     public user: UserService) { }
@@ -15,6 +16,14 @@ export class TopNavComponent implements OnInit {
   ngOnInit() {
     //初始化菜单数据
     this.topNavService.queryCategory();
+  }
+
+  mouseOver(category) {
+    this.mouseOverCategory = category;
+  }
+
+  mouseOut() {
+    this.mouseOverCategory = undefined;
   }
 
 }
