@@ -3,9 +3,15 @@
     border: none;
 }
 
+/* 页面底部按钮 */
 .page-bottom-button-group {
     text-align: center;
 }
 .page-bottom-button-group > button {
     margin: 5px;
+}
+
+/* 页面外边框 */
+.page-basic {
+    padding: 5px;
 }

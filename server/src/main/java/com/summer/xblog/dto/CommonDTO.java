@@ -5,32 +5,32 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CommonDTO {
+public class CommonDTO<T> {
     private boolean success;
     private String message;
-    private Object data;
+    private T data;
 
-    public static CommonDTO success(String message, Object data) {
-        return new CommonDTO(true, message, data);
+    public static <T> CommonDTO<T> success(String message, T data) {
+        return new CommonDTO<>(true, message, data);
     }
 
-    public static CommonDTO success(String message) {
+    public static <T> CommonDTO<T> success(String message) {
         return success(message, null);
     }
 
-    public static CommonDTO success(Object data) {
+    public static <T> CommonDTO<T> success(T data) {
         return success(null, data);
     }
 
-    public static CommonDTO fail(String message, Object data) {
-        return new CommonDTO(false, message, data);
+    public static <T> CommonDTO<T> fail(String message, T data) {
+        return new CommonDTO<>(false, message, data);
     }
 
-    public static CommonDTO fail(String message) {
+    public static <T> CommonDTO<T> fail(String message) {
         return fail(message, null);
     }
 
-    public static CommonDTO fail(Object data) {
+    public static <T> CommonDTO<T> fail(T data) {
         return fail(null, data);
     }
 

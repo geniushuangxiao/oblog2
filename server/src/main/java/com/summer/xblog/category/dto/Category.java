@@ -21,6 +21,11 @@ public class Category {
      * 分类id
      */
     private String id;
+
+    /**
+     * 分类id路径
+     */
+    private String idPath;
     /**
      * 分类标签
      */

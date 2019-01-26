@@ -17,6 +17,9 @@ import { CenterBodyComponent } from './home/center-body/center-body.component';
 import { LoginComponent } from './user/login/login.component';
 import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
 import { TopNavFlyoutComponent } from './home/top-nav-flyout/top-nav-flyout.component';
+import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
+import { MenuSettingComponent } from './setting/menu-setting/menu-setting.component';
 
 registerLocaleData(zh);
 
@@ -28,7 +31,10 @@ registerLocaleData(zh);
     CenterBodyComponent,
     LoginComponent,
     BlogEditComponent,
-    TopNavFlyoutComponent
+    TopNavFlyoutComponent,
+    BlogListComponent,
+    BreadcrumbComponent,
+    MenuSettingComponent
   ],
   imports: [
     BrowserModule,

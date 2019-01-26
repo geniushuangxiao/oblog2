@@ -24,9 +24,20 @@ a {
 
 .nav-flyout {
     position: fixed;
-    top: 62px;
+    top: 61px;
     left: 0px;
     right: 0px;
     background-color: white;
     z-index: 999;
+    padding: 0 50px;
+}
+
+/* 用户设置下拉框样式 */
+.user-setting > p {
+    color: rgba(0, 0, 0, 0.65);
+    padding: 5px;
+}
+.user-setting > p:hover {
+    color: #1890ff;
+    cursor: pointer;
 }

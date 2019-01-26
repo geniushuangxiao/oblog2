@@ -26,7 +26,7 @@ export class UserService {
 
   user() {
     this.http.get("user").subscribe(res=>{
-      this.principal = res;
+      this.principal = res.data;
     });
   }
 

@@ -1,0 +1,28 @@
+.menu-item {
+    padding: 5px;
+    text-align: center;
+}
+.menu-item-id {
+    width: 30%;
+    margin-right:8px;
+    display: inline-block;
+}
+.menu-item-label {
+    width: 40%;
+    display: inline-block;
+    margin-right: 4px;
+}
+.menu-item-button {
+    cursor: pointer;
+    margin-right: 4px;
+    font-size: 20px;
+    transition: all .3s;
+    color: #1890ff;
+}
+.menu-item-button-delete {
+    color: #ff4d4f !important;
+}
+.button-group {
+    width: 80px;
+    display: inline-block;
+}

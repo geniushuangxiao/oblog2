@@ -23,7 +23,7 @@ public class BlogService {
         //博客不属于提交人
         if(!principal.getName().equals(blog.getAuthor())) {
             log.error(String.format("%s modify blog %s, But blog's author is %s", principal.getName(), blog.getName(), blog.getAuthor()));
-            return new CommonDTO(false, "您没有修改此博客权限", blog);
+            return CommonDTO.fail("您没有修改此博客权限", blog);
         }
         long current = System.currentTimeMillis();
         if(0 == blog.getId()) {
@@ -37,7 +37,7 @@ public class BlogService {
                 Blog oldBlog = oldBlogOptional.get();
                 if(!oldBlog.getAuthor().equals(blog.getAuthor())) {
                     log.error(String.format("Attach happened. %s modify blog %s, But blog's author is %s", principal.getName(), blog.getName(), blog.getAuthor()));
-                    return new CommonDTO(false, "您没有修改此博客权限", blog);
+                    return CommonDTO.fail("您没有修改此博客权限", blog);
                 }
                 blog.setCommitNum(oldBlog.getCommitNum());
                 blog.setStarNum(oldBlog.getStarNum());
@@ -46,18 +46,20 @@ public class BlogService {
         }
         blog.setLastModifyTime(current);
         Blog save = repository.save(blog);
-        return new CommonDTO(true, "", save);
+        return CommonDTO.success(save);
     }
 
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
-    public void deleteById(Principal principal, long id) {
+    public boolean deleteById(Principal principal, long id) {
         Optional<Blog> oldBlogOptional = repository.findById(id);
         if(oldBlogOptional.isPresent()) {
             Blog blog = oldBlogOptional.get();
             if(blog.getAuthor().equals(principal.getName())) {
                 repository.deleteById(id);
+                return true;
             }
         }
+        return false;
     }
 
     public void viewTimeRefresh(long id) {

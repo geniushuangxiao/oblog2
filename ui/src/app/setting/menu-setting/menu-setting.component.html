@@ -1,0 +1,25 @@
+<div class="page-basic">
+  <!-- 面包屑 -->
+  <app-breadcrumb [idPath]="id" (idPathChange)="idChange($event)"></app-breadcrumb>
+  <!-- 表单 -->
+  <div>
+    <div *ngFor="let item of queryCurrentCategories()" class="menu-item">
+        <input nz-input class="menu-item-id" placeholder="请输入菜单id" [(ngModel)]="item.id">
+        <input nz-input class="menu-item-label" placeholder="请输入菜单标签" [(ngModel)]="item.label">
+        <div class="button-group">
+          <!-- 上移 -->
+          <i nz-icon *ngIf="item !== queryCurrentCategories()[0]" 
+          type="up-circle" class="menu-item-button" (click)="up(item)"></i>
+          <!-- 下移 -->
+          <i nz-icon *ngIf="item !== queryCurrentCategories()[queryCurrentCategories().length - 1]" 
+          type="down-circle" class="menu-item-button" (click)="down(item)"></i>
+          <!-- 删除 -->
+          <i nz-icon type="minus-circle" class="menu-item-button menu-item-button-delete" (click)="remove(item)"></i>
+        </div>
+        <button nz-button (click)="toChildren(item)">子菜单</button>
+    </div>
+    <div class="page-bottom-button-group">
+      <button style="width: 300px;" nz-button (click)="add()">增加</button>
+    </div>
+  </div>
+</div>

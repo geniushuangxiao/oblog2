@@ -4,10 +4,7 @@ import com.summer.xblog.dao.BlogRepository;
 import com.summer.xblog.dto.CommonDTO;
 import com.summer.xblog.entity.Blog;
 import com.summer.xblog.service.BlogService;
-import com.summer.xblog.service.CardService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,26 +20,29 @@ public class BlogController {
     private BlogRepository repository;
     @Autowired
     private BlogService service;
-    @Autowired
-    private CardService cardService;
     @GetMapping("/card/{card}")
-    public List<Blog> queryByCategory(@PathVariable(name="card") String card) {
-        //暂时不使用缓存，后续负载大后，使用缓存
-        cardService.viewTimeRefresh(card);
-        return repository.findByCard(card);
+    public CommonDTO<List<Blog>> queryByCategory(@PathVariable(name="card") String card) {
+        List<Blog> blogs = repository.findByCard(card);
+        return CommonDTO.success(blogs);
     }
     @GetMapping("/{id}")
-    public Blog queryById(@PathVariable(name="id") long id) {
+    public CommonDTO<Blog> queryById(@PathVariable(name="id") long id) {
         final Optional<Blog> optional = repository.findById(id);
         service.viewTimeRefresh(id);
-        return optional.isPresent()? optional.get() : null;
+        return optional.map(CommonDTO::success)
+                .orElseGet(() -> CommonDTO.fail(String.format("未找到id为%d的博客", id)));
     }
     @PostMapping
     public CommonDTO save(Principal principal, @RequestBody Blog blog) {
         return service.save(principal, blog);
     }
     @DeleteMapping
-    public void delete(Principal principal, @RequestParam long id) {
-        service.deleteById(principal, id);
+    public CommonDTO delete(Principal principal, @RequestParam long id) {
+        boolean success = service.deleteById(principal, id);
+        if(success) {
+            return CommonDTO.success(String.format("删除id为%d的博客成功", id));
+        } else {
+            return CommonDTO.fail(String.format("删除id为%d的博客失败", id));
+        }
     }
 }

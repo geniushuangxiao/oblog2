@@ -1,0 +1,17 @@
+.blog-list {
+    background-color: #efefef;
+    padding: 5px;
+}
+:host ::ng-deep .demo-loadmore-list {
+    background-color: white;
+    min-height: 350px;
+    width: 70%;
+    margin:0 auto;
+    margin-top: 5px;
+}
+:host ::ng-deep .loadmore {
+    text-align: center;
+    margin-top: 12px;
+    height: 32px;
+    line-height: 32px;
+}

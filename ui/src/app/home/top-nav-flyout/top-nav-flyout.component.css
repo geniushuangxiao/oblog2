@@ -3,3 +3,17 @@
     width: 200px;
     margin: 20px;
 }
+
+/* 浮出菜单第一个元素 */
+.one-category > a:first-child {
+    font-size: 16px;
+}
+/* 浮出菜单元素 */
+.one-category > a {
+    color: rgba(0, 0, 0, 0.65);
+    padding: 5px;
+}
+.one-category > a:hover {
+    color: #1890ff;
+    border-bottom: 2px solid #1890ff;
+}

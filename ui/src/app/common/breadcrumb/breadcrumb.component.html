@@ -1,0 +1,8 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a (click)="breadcrumbClick(null)">首页</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngFor="let category of breadcrumbCategories()">
+    <a (click)="breadcrumbClick(category)">{{category.label}}</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>

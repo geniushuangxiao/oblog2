@@ -1,25 +1,25 @@
 <ul nz-menu [nzMode]="'horizontal'">
   <li nz-menu-item href="/home">TechTopic</li>
-  <li *ngFor="let category of topNavService.categories" (mouseenter)="mouseOver(category)" nz-menu-item>{{category.label}}
+  <li nz-menu-item *ngFor="let category of cagegoryServcie.categories" (mouseenter)="mouseOver(category)">{{category.label}}
   </li>
-  
+
   <a *ngIf="!user.authenticated()" routerLink="/register">注册</a>
   <a *ngIf="!user.authenticated()" routerLink="/login">登录</a>
   <!-- 登陆用户操作菜单 -->
   <a *ngIf="user.authenticated()">
-    <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
-    </nz-avatar>
-    <i nz-icon type="caret-down" theme="outline" nz-popover [nzTitle]="user.userName()" [nzContent]="contentTemplate" nzPlacement="bottomRight"></i>
+    {{user.userName()}}
+    <i nz-icon type="down" nz-popover [nzContent]="contentTemplate"
+    nzPlacement="bottomRight" style="font-size: 10px;"></i>
     <ng-template #contentTemplate>
-      <div>
-        <p>Content</p>
-        <p>Content</p>
+      <div class="user-setting">
+        <p *ngIf="user.isAdmin()" routerLink="/setting/menu">菜单设置</p>
       </div>
     </ng-template>
   </a>
   <!-- 登陆用户的消息 -->
   <a *ngIf="user.authenticated()">
-    <nz-avatar nzIcon="bell"></nz-avatar>10
+    <i nz-icon type="bell"></i> 10
   </a>
 </ul>
-<app-top-nav-flyout (mouseleave)="mouseOut()" *ngIf="mouseOverCategory" [parentCategory]="mouseOverCategory" class="nav-flyout"></app-top-nav-flyout>
+<app-top-nav-flyout (mouseleave)="mouseOut()" *ngIf="showFlyout()" [parentCategory]="mouseOverCategory" class="nav-flyout">
+</app-top-nav-flyout>

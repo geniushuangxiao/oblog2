@@ -7,8 +7,7 @@ import com.summer.xblog.dto.Register;
 import com.summer.xblog.entity.User;
 import com.summer.xblog.entity.UserAuthority;
 import com.summer.xblog.tools.Validators;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,8 +18,8 @@ import java.security.SecureRandom;
 import java.util.*;
 
 @Service
+@Slf4j
 public class UserService {
-	private static final Logger log = LoggerFactory.getLogger(UserService.class);
 	@Autowired
 	private UserRepository userRepository;
 
@@ -43,7 +42,7 @@ public class UserService {
 	public CommonDTO register(Register register) {
 		if(linkCache.full()) {
 			log.warn("系统可能正被垃圾注册攻击。", register);
-			return new CommonDTO(false, "系统繁忙，请稍后再试", null);
+			return CommonDTO.fail("系统繁忙，请稍后再试");
 		}
 		//检查注册信息是否合乎要求
 		if(Validators.nullOrEmpty(register.getUsername())
@@ -51,43 +50,37 @@ public class UserService {
 				|| Validators.nullOrEmpty(register.getPassword2())
 				|| Validators.nullOrEmpty(register.getEmail())
 				|| !register.getPassword().equals(register.getPassword2())) {
-			return new CommonDTO(false, "参数不合法", null);
+			return CommonDTO.fail("参数不合法");
 		}
-		//检查用户名是否已经被注册
-		final boolean exist = !userRepository.findByUsername(register.getUsername()).isEmpty();
-		if(exist) {
-			return new CommonDTO(false, String.format("用户名%s已经被注册", register.getUsername()), null);
-		}
-		//检查邮箱是否已经被注册
-		final boolean emailUsed = !userRepository.findByEmail(register.getEmail()).isEmpty();
-		if(emailUsed) {
-			return new CommonDTO(false, String.format("邮箱%s已经被注册", register.getEmail()), null);
-		}
-		//注册用户
-		final User user = this.privateAddUser(register.getUsername(), register.getPassword(), "USER", register.getEmail(), false);
-		//生成注册账号激活链接，并发送到用户邮箱
-		try {
-			SecureRandom random = SecureRandom.getInstanceStrong();
-			boolean success = false;
-			//尝试10次，保证发送给每个注册用户链接都不同，且不无限循环
-			for(int i = 0; i < 10; i ++) {
-				String randomNum = String.valueOf(random.nextLong());
-				if(!linkCache.exists(randomNum)) {
-					this.mailService.sendSimpleEmail(register.getEmail(), randomNum);
-					this.linkCache.push(user, randomNum);
-					success = true;
-					break;
+		synchronized (this) {
+			//检查用户名是否已经被注册
+			final boolean exist = !userRepository.findByUsername(register.getUsername()).isEmpty();
+			if(exist) {
+				return CommonDTO.fail(String.format("用户名%s已经被注册", register.getUsername()));
+			}
+			//检查邮箱是否已经被注册
+			final boolean emailUsed = !userRepository.findByEmail(register.getEmail()).isEmpty();
+			if(emailUsed) {
+				return CommonDTO.fail(String.format("邮箱%s已经被注册", register.getEmail()));
+			}
+			//注册用户
+			final User user = this.privateAddUser(register.getUsername(), register.getPassword(), "USER", register.getEmail(), false);
+			//生成注册账号激活链接，并发送到用户邮箱
+			try {
+				SecureRandom random = SecureRandom.getInstanceStrong();
+				String randomStr = register.getUsername() + String.valueOf(random.nextLong());//加上用户名，确保唯一
+				boolean sendSuccess = this.mailService.sendSimpleEmail(register.getEmail(), randomStr);
+				if(sendSuccess) {
+					this.linkCache.push(user, randomStr);
+					return CommonDTO.success("注册成功，请前往邮箱激活");
 				}
+			} catch (NoSuchAlgorithmException e) {
+				log.error("随机数生成失败", e);
 			}
-			if(!success) {
-				return new CommonDTO(false, "包含激活链接的邮件发送失败，激活码生成失败，请稍后再试", null);
-			}
-		} catch (NoSuchAlgorithmException e) {
 			//激活链接发送失败，注册失败，删除数据库中脏数据
 			userRepository.delete(user);
-			return new CommonDTO(false, "包含激活链接的邮件发送失败，请稍后再试", null);
+			return CommonDTO.fail( "包含激活链接的邮件发送失败，激活码生成失败，请稍后再试");
 		}
-		return new CommonDTO(true, "", null);
 	}
 
 	/**
@@ -129,15 +122,21 @@ public class UserService {
 	}
 
 	@Secured({ "ROLE_ADMIN" })
-	public List<User> queryAll() {
+	public CommonDTO<List<User>> queryAll() {
 		List<User> result = new ArrayList<>();
 		userRepository.findAll().forEach(result::add);
-		return result;
+		return CommonDTO.success(result);
 	}
 
 	@Secured({ "ROLE_ADMIN" })
-	public void deleteUser(String username) {
-		userRepository.deleteByUsername(username);
+	public boolean deleteUser(String username) {
+		try {
+			userRepository.deleteByUsername(username);
+			return true;
+		} catch (Throwable e) {
+			log.error("删除用户数据库操作失败", e);
+			return false;
+		}
 	}
 
 }
