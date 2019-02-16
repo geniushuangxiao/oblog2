@@ -20,6 +20,7 @@ import { TopNavFlyoutComponent } from './home/top-nav-flyout/top-nav-flyout.comp
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { MenuSettingComponent } from './setting/menu-setting/menu-setting.component';
+import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 
 registerLocaleData(zh);
 
@@ -34,7 +35,8 @@ registerLocaleData(zh);
     TopNavFlyoutComponent,
     BlogListComponent,
     BreadcrumbComponent,
-    MenuSettingComponent
+    MenuSettingComponent,
+    BlogDetailComponent
   ],
   imports: [
     BrowserModule,

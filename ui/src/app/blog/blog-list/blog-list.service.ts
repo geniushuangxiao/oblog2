@@ -17,6 +17,7 @@ export class BlogListService {
     private userService: UserService) { }
 
   queryBlogList(categoryId: string): void {
+    this.blogs = [];
     this.categoryId = categoryId;
     this.http.get("blogs/" + this.categoryId).subscribe(response => {
       if(response.success) {

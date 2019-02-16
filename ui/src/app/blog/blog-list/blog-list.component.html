@@ -1,6 +1,6 @@
 <div class="blog">
   <div *ngFor="let blog of blogListService.blogs" class="card-blogs">
-    <nz-card [nzTitle]="blog.name" [nzExtra]="extraTemplate">
+    <nz-card [nzTitle]="titleTemplate" [nzExtra]="extraTemplate">
       <div class="blog-summary-div">
         <!-- 博文简介 -->
         <div class="blog-summary-text-div">{{blog.desc}}</div>
@@ -13,6 +13,11 @@
         </div>
       </div>
     </nz-card>
+    <!-- 卡片标题 -->
+    <ng-template #titleTemplate>
+      <a (click)="blogDetail(blog)" style="color: rgba(1, 1, 1, 0.75)">{{blog.name}}</a>
+    </ng-template>
+    <!-- 卡片右上角图标按钮 -->
     <ng-template #extraTemplate>
       <a (click)="edit(blog)"><i nz-icon type="edit" theme="outline" class="blog-card-button"></i></a>
       <a (click)="delete(blog)"><i nz-icon type="delete" theme="outline" class="blog-card-button" style="color: #ff4d4f"></i></a>

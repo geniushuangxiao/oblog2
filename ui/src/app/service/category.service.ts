@@ -27,6 +27,7 @@ export class CategoryService {
   saveCategory(): void {
     this.http.post("config/category", this.categories).subscribe(response => {
       if(response.success) {
+        this.queryCategory();
         this.message.success(response.message);
       } else {
         this.message.error(response.message);

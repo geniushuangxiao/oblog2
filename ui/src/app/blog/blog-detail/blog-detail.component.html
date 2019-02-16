@@ -1,0 +1,6 @@
+<div *ngIf="blog" id="blog-detail">
+  <div style="margin:0 15px;">
+    <h2 style="text-align: center;">{{blog.name}}</h2>
+    <span [innerHTML]="securityBlogContent()"></span>
+  </div>
+</div>

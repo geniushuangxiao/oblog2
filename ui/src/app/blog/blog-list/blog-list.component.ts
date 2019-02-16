@@ -31,4 +31,8 @@ export class BlogListComponent implements OnInit {
   edit(blog: Blog) {
     this.router.navigate(["edit", blog.id]);
   }
+
+  blogDetail(blog: Blog) {
+    this.router.navigate(["blogdetail", blog.id]);
+  }
 }

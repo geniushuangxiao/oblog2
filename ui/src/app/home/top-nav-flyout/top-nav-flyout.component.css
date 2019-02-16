@@ -13,6 +13,7 @@
 .one-category > a {
     color: rgba(0, 0, 0, 0.65);
     padding: 5px;
+    line-height: 25px;
 }
 .one-category > a:hover {
     color: #1890ff;
