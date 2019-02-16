@@ -1,3 +1,5 @@
-#blog-detail {
-    padding: 10px;
+.blog-detail {
+    margin: 0 15%;
+    padding: 5px;
+    height: 100%;
 }

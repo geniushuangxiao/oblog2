@@ -1,6 +1,9 @@
 .blog {
     padding: 5px;
+    margin: 0 15%;
+    background-color: white;
 }
+
 input {
     margin-bottom: 5px;
 }

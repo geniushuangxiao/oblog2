@@ -37,7 +37,7 @@ export class BlogEditComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit() {
-    this.quillHeight.height = (window.innerHeight - 131) + 'px';
+    this.quillHeight.height = (window.innerHeight - 155) + 'px';
     this.route.params.subscribe(params => {
       this.blogEditService.init(params.id);
     });
