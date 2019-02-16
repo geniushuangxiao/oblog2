@@ -12,11 +12,11 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    /**博客所属卡片*/
-    @Column(length = 20)
-    private String card;
+    /**博客菜单路径*/
+    @Column(length = 200)
+    private String categoryId;
     /**博客名*/
-    @Column(length = 20)
+    @Column(length = 200)
     private String name;
     /**博客内容*/
     @Column(length = 100000)
@@ -31,12 +31,6 @@ public class Blog {
     private String author;
     private long firstWriteTime;
     private long lastModifyTime;
-    /**评论次数*/
-    private long commitNum;
     /**查看次数*/
     private long viewNum;
-    /**点赞次数*/
-    private long starNum;
-    @Transient
-    private boolean star;
 }

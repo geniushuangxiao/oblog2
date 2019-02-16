@@ -1,4 +1,4 @@
 <div class="one-category" *ngFor="let category of parentCategory.children">
-  <a>{{category.label}}</a>
-  <a *ngFor="let child of category.children">{{child.label}}</a>
+  <a>{{category.label}}</a><br>
+  <a *ngFor="let child of category.children" (click)="toBlogListPage(child)">&nbsp;&nbsp;{{child.label}}<br></a>
 </div>

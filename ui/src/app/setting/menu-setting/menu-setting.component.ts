@@ -68,6 +68,16 @@ export class MenuSettingComponent implements OnInit {
     this.category.findCurrentArray(this.id).push(new Category());
   }
 
+  // 保存到数据库
+  save(): void {
+    this.category.saveCategory();
+  }
+
+  // 取消修改
+  cancleModify(): void {
+    this.category.queryCategory();
+  }
+
   idChange(category: Category) {
     if(category) {
       this.router.navigate(["/setting/menu", category.idPath]);

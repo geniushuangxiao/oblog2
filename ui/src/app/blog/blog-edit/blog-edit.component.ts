@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
 import { BlogEditService } from './blog-edit.service';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-blog-edit',
@@ -30,13 +32,26 @@ export class BlogEditComponent implements OnInit {
     ]
   };
 
-  constructor(private blogEditService: BlogEditService) { }
+  constructor(private blogEditService: BlogEditService,
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit() {
     this.quillHeight.height = (window.innerHeight - 131) + 'px';
+    this.route.params.subscribe(params => {
+      this.blogEditService.init(params.id);
+    });
   }
 
   contentChange($event) {
     this.blogEditService.blog.desc = $event.text.substring(0, 500);
+  }
+
+  save(release: boolean): void {
+    this.blogEditService.saveBlog(release);
+  }
+
+  cancle(): void {
+    this.location.back();
   }
 }

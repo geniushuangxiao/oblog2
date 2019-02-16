@@ -18,6 +18,17 @@ export class CategoryService {
       if(response.success) {
         this.categories = response.data;
       } else {
+        this.categories = [];
+        this.message.error(response.message);
+      }
+    })
+  }
+
+  saveCategory(): void {
+    this.http.post("config/category", this.categories).subscribe(response => {
+      if(response.success) {
+        this.message.success(response.message);
+      } else {
         this.message.error(response.message);
       }
     })

@@ -1,28 +1,24 @@
-<div class="blog-list">
-  <app-breadcrumb [idPath]="'about.bugReport'"></app-breadcrumb>
-  <div>
-    <button nz-button nzType="primary">增加</button>
-    <nz-list class="demo-loadmore-list" [nzDataSource]="list" [nzItemLayout]="'horizontal'" [nzLoading]="initLoading"
-      [nzRenderItem]="item" [nzLoadMore]="loadMore">
-      <ng-template #item let-item>
-        <nz-list-item [nzActions]="item.loading?[]:[editAction,moreAction]">
-          <nz-skeleton [nzAvatar]="true" [nzActive]="true" [nzTitle]="false" [nzLoading]="item.loading">
-            <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team">
-              <ng-template #nzTitle>
-                <a href="https://ng.ant.design">{{item.name.last}}</a>
-              </ng-template>
-            </nz-list-item-meta>
-            <ng-template #editAction><a (click)="edit(item)">edit</a></ng-template>
-            <ng-template #moreAction><a (click)="edit(item)">more</a></ng-template>
-          </nz-skeleton>
-        </nz-list-item>
-      </ng-template>
-      <ng-template #loadMore>
-        <div class="loadmore">
-          <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
+<div class="blog">
+  <div *ngFor="let blog of blogListService.blogs" class="card-blogs">
+    <nz-card [nzTitle]="blog.name" [nzExtra]="extraTemplate">
+      <div class="blog-summary-div">
+        <!-- 博文简介 -->
+        <div class="blog-summary-text-div">{{blog.desc}}</div>
+        <!-- 博文作者、分类、日期、阅读量 -->
+        <div class="blog-summary-icon-div">
+            <i nz-icon type="user" theme="outline"></i>&nbsp;&nbsp;{{blog.author}}
+            <!-- <i nz-icon type="tag" theme="outline"></i>&nbsp;&nbsp;Java基础 -->
+            <i nz-icon type="calendar" theme="outline"></i>&nbsp;&nbsp;{{blog.lastModifyTime | date:'yyyy-MM-dd HH:mm:ss'}}
+            <i nz-icon type="eye" theme="outline"></i>&nbsp;&nbsp;{{blog.viewNum}}
         </div>
-      </ng-template>
-    </nz-list>
+      </div>
+    </nz-card>
+    <ng-template #extraTemplate>
+      <a (click)="edit(blog)"><i nz-icon type="edit" theme="outline" class="blog-card-button"></i></a>
+      <a (click)="delete(blog)"><i nz-icon type="delete" theme="outline" class="blog-card-button" style="color: #ff4d4f"></i></a>
+    </ng-template>
+  </div>
+  <div class="page-bottom-button-group">
+    <button nz-button nzType="dashed" style="width: 300px;" (click)="add()">添加</button>
   </div>
 </div>

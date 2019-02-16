@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd';
-
-const count = 5;
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Blog } from '../../dto/blog';
+import { BlogListService } from './blog-list.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -12,36 +10,25 @@ const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,
 })
 export class BlogListComponent implements OnInit {
 
-  initLoading = true; // bug
-  loadingMore = false;
-  data = [];
-  list = [];
-
-  constructor(private http: HttpClient, private msg: NzMessageService) {}
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private blogListService: BlogListService) {}
 
   ngOnInit(): void {
-    this.getData((res: any) => {
-      this.data = res.results;
-      this.list = res.results;
-      this.initLoading = false;
+    this.route.params.subscribe(params => {
+      this.blogListService.queryBlogList(params.id);
     });
   }
 
-  getData(callback: (res: any) => void): void {
-    this.http.get(fakeDataUrl).subscribe((res: any) => callback(res));
+  add(): void {
+    this.router.navigate(["edit", this.blogListService.categoryId]);
   }
 
-  onLoadMore(): void {
-    this.loadingMore = true;
-    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
-    this.http.get(fakeDataUrl).subscribe((res: any) => {
-      this.data = this.data.concat(res.results);
-      this.list = [...this.data];
-      this.loadingMore = false;
-    });
+  delete(blog: Blog): void {
+    this.blogListService.delete(blog);
   }
 
-  edit(item: any): void {
-    this.msg.success(item.email);
+  edit(blog: Blog) {
+    this.router.navigate(["edit", blog.id]);
   }
 }

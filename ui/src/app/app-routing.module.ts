@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'blogs/:id', component: BlogListComponent },
-  { path: 'edit', component: BlogEditComponent },
+  { path: 'edit/:id', component: BlogEditComponent },
   { path: 'setting/menu/:id', component: MenuSettingComponent },
   { path: 'setting/menu', component: MenuSettingComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full'}

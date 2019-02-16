@@ -8,8 +8,8 @@
     [style]="quillHeight">
   </quill-editor>
   <div class="page-bottom-button-group">
-    <button nz-button nzType="primary" (click)="save()">保存</button>
-    <button nz-button nzType="primary">发布</button>
-    <button nz-button nzType="danger">取消</button>
+    <button nz-button nzType="primary" (click)="save(false)">保存</button>
+    <button nz-button nzType="primary" (click)="save(true)">发布</button>
+    <button nz-button nzType="danger" (click)="cancle()">取消</button>
   </div>
 </div>

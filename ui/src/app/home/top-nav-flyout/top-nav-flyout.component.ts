@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from '../../dto/category';
 @Component({
   selector: 'app-top-nav-flyout',
@@ -8,9 +9,13 @@ import { Category } from '../../dto/category';
 export class TopNavFlyoutComponent implements OnInit {
   @Input() parentCategory: Category;
   
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  toBlogListPage(category: Category): void {
+    this.router.navigate(["blogs", category.idPath]);
   }
 
 }

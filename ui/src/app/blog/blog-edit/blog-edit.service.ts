@@ -4,33 +4,49 @@ import { Router } from '@angular/router';
 import { HttpService } from '../../tools/http.service';
 import { UserService } from '../../tools/user.service';
 import { Location } from '@angular/common';
+import { Blog } from '../../dto/blog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogEditService {
-  blog: any = {};
+  blog: Blog = new Blog();
 
   constructor(private message: NzMessageService,
     private router: Router,
     private http: HttpService,
     private user: UserService,
-    private location: Location) { }
+    private location: Location) {}
 
-  save(blogContent):void {
-    this.blog.author = this.user.userName();
-    // this.blog.card = this.cardDetail.cardName;
-    this.blog.release = false;
-    this.blog.star = false;
-    this.blog.content = blogContent;
+  init(pathVariable: any): void {
+    let regEx = /[0-9]+/;
+    if(regEx.test(pathVariable)) {//编辑
+      this.queryBlog(pathVariable);
+    } else {//新建
+      this.blog = new Blog();
+      this.blog.categoryId = pathVariable;
+    }
+  }
 
-    this.http.post("blog", this.blog).subscribe(response =>{
-      if((<any>response).success) {
-        this.location.back();
-        this.message.success("保存成功");
+  queryBlog(id: number) {
+    this.http.get("blog/" + id).subscribe(response => {
+      if(response.success) {
+        this.blog = response.data;
       } else {
-        this.message.error((<any>response).message);
+        this.message.error(response.message);
       }
-    });
+    })
+  }
+
+  saveBlog(release: boolean):void {
+    this.blog.author = this.user.userName();
+    this.blog.release = release;
+    this.http.post("blog", this.blog).subscribe(response => {
+      if(response.success) {
+        this.location.back();
+      } else {
+        this.message.error(response.message);
+      }
+    })
   }
 }

@@ -1,17 +1,38 @@
-.blog-list {
-    background-color: #efefef;
-    padding: 5px;
+/* 博客列表页面整体样式 */
+.blog {
+    margin: 10px 15%;
 }
-:host ::ng-deep .demo-loadmore-list {
-    background-color: white;
-    min-height: 350px;
-    width: 70%;
-    margin:0 auto;
-    margin-top: 5px;
+/* 博客卡片样式 */
+.card-blogs {
+    margin: 10px 0;
 }
-:host ::ng-deep .loadmore {
-    text-align: center;
-    margin-top: 12px;
-    height: 32px;
-    line-height: 32px;
+/* 博客卡片左边蓝色条样式 */
+.card-blogs:before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 36px;
+    background: #1890ff;
+    z-index: 666;
+}
+
+/* 博客摘要div */
+.blog-summary-div {
+    margin-left: 20px;
+}
+/* 博客摘要文本div */
+.blog-summary-text-div {
+    margin-left: 15px;
+}
+/* 图标div */
+.blog-summary-icon-div {
+    margin-top: 10px;
+}
+.blog-summary-icon-div > i {
+    margin-left: 15px;
+}
+/* 博客卡片右上角按钮 */
+.blog-card-button {
+    font-size: 18px;
+    margin: 0 5px;
 }

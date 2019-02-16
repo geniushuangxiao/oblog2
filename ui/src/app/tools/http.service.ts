@@ -15,7 +15,7 @@ export class HttpService {
   post(url: string, body: any): Observable<HttpResponse> {
     return this.http.post<HttpResponse>(this.baseUrl + url, body);
   }
-  delete(url: string, params: any): Observable<HttpResponse> {
-    return this.http.delete<HttpResponse>(this.baseUrl + url, {"params": params});
+  delete(url: string): Observable<HttpResponse> {
+    return this.http.delete<HttpResponse>(this.baseUrl + url);
   }
 }

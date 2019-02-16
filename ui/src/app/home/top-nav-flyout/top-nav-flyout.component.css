@@ -1,6 +1,7 @@
 .one-category {
-    display: inline-block;
+    display: inline-table;
     width: 200px;
+    height: 100%;
     margin: 20px;
 }
 
