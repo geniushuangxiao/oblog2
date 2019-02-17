@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { QuillModule } from 'ngx-quill';
 import { registerLocaleData } from '@angular/common';
@@ -21,6 +21,9 @@ import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { MenuSettingComponent } from './setting/menu-setting/menu-setting.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
+import { InterceptorService } from './service/interceptor.service';
+import { RegisterComponent } from './user/register/register.component';
+import { RegisterActivateComponent } from './user/register-activate/register-activate.component';
 
 registerLocaleData(zh);
 
@@ -36,7 +39,9 @@ registerLocaleData(zh);
     BlogListComponent,
     BreadcrumbComponent,
     MenuSettingComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    RegisterComponent,
+    RegisterActivateComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ registerLocaleData(zh);
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: NZ_I18N, useValue: zh_CN }
+    { provide: NZ_I18N, useValue: zh_CN },
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

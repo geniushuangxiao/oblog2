@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DomSanitizer } from '@angular/platform-browser';
-import { HttpService } from '../../tools/http.service';
+import { HttpService } from '../../service/http.service';
 import { Blog } from '../../dto/blog';
 
 @Component({

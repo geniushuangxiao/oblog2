@@ -1,6 +1,6 @@
 <div class="blog">
-  <div *ngFor="let blog of blogListService.blogs" class="card-blogs">
-    <nz-card [nzTitle]="titleTemplate" [nzExtra]="extraTemplate">
+  <div *ngFor="let blog of blogListService.blogs">
+    <nz-card class="card-blogs" *ngIf="showBlog(blog)" [nzTitle]="titleTemplate" [nzExtra]="extraTemplate">
       <div class="blog-summary-div">
         <!-- 博文简介 -->
         <div class="blog-summary-text-div">{{blog.desc}}</div>
@@ -19,11 +19,13 @@
     </ng-template>
     <!-- 卡片右上角图标按钮 -->
     <ng-template #extraTemplate>
-      <a (click)="edit(blog)"><i nz-icon type="edit" theme="outline" class="blog-card-button"></i></a>
-      <a (click)="delete(blog)"><i nz-icon type="delete" theme="outline" class="blog-card-button" style="color: #ff4d4f"></i></a>
+      <a *ngIf="showNonReleaseIcon(blog)"><i nz-icon type="lock" theme="outline" class="blog-card-button"></i></a>
+      <a *ngIf="showReleaseIcon(blog)"><i nz-icon type="unlock" theme="outline" class="blog-card-button"></i></a>
+      <a *ngIf="loginUserBlog(blog)" (click)="edit(blog)"><i nz-icon type="edit" theme="outline" class="blog-card-button"></i></a>
+      <a *ngIf="loginUserBlog(blog)" (click)="delete(blog)"><i nz-icon type="delete" theme="outline" class="blog-card-button" style="color: #ff4d4f"></i></a>
     </ng-template>
   </div>
-  <div class="page-bottom-button-group">
+  <div class="page-bottom-button-group" *ngIf="userService.isAdmin()">
     <button nz-button nzType="dashed" style="width: 300px;" (click)="add()">添加</button>
   </div>
 </div>

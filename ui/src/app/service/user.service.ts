@@ -30,7 +30,7 @@ export class UserService {
     });
   }
 
-  userName() {
+  userName(): string {
     return this.principal? this.principal.name : '未登陆';
   }
 

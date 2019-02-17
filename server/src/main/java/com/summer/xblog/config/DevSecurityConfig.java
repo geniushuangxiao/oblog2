@@ -24,7 +24,7 @@ public class DevSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll().and()
                 .formLogin().loginPage("/api/login").permitAll().successHandler(successHandler).failureHandler(failHandler).and()
                 .logout().logoutUrl("/api/logout").and()
-                .sessionManagement().maximumSessions(1).expiredUrl("/api/login");
+                .sessionManagement().maximumSessions(1).expiredUrl("/login");
         http.csrf().disable().headers().frameOptions().sameOrigin();    //iframe同源允许链接
         http.cors().disable();
     }

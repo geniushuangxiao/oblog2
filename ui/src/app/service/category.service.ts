@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
-import { HttpService } from '../tools/http.service';
+import { HttpService } from '../service/http.service';
 import { Category } from '../dto/category';
 
 @Injectable({

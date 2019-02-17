@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
-import { HttpService } from '../../tools/http.service';
-import { UserService } from '../../tools/user.service';
+import { HttpService } from '../../service/http.service';
+import { UserService } from '../../service/user.service';
 import { Location } from '@angular/common';
 import { Blog } from '../../dto/blog';
 
@@ -19,11 +19,11 @@ export class BlogEditService {
     private location: Location) {}
 
   init(pathVariable: any): void {
+    this.blog = new Blog();
     let regEx = /[0-9]+/;
     if(regEx.test(pathVariable)) {//编辑
       this.queryBlog(pathVariable);
     } else {//新建
-      this.blog = new Blog();
       this.blog.categoryId = pathVariable;
     }
   }

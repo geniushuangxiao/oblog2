@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Blog } from '../../dto/blog';
 import { BlogListService } from './blog-list.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -12,7 +13,8 @@ export class BlogListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private blogListService: BlogListService) {}
+    private blogListService: BlogListService,
+    private userService: UserService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -34,5 +36,25 @@ export class BlogListComponent implements OnInit {
 
   blogDetail(blog: Blog) {
     this.router.navigate(["blogdetail", blog.id]);
+  }
+
+  // 博客作者是否是当前登陆用户
+  loginUserBlog(blog: Blog): boolean {
+    return this.userService.userName() === blog.author;
+  }
+
+  // 博客列表中是否展示博客
+  showBlog(blog: Blog): boolean {
+    return blog.release || this.userService.isAdmin() || this.userService.userName() === blog.author
+  }
+
+  // 博客已经发布
+  showReleaseIcon(blog: Blog): boolean {
+    return (this.userService.isAdmin() || this.userService.userName() === blog.author) && blog.release;
+  }
+
+  // 博客未发布
+  showNonReleaseIcon(blog: Blog): boolean {
+    return (this.userService.isAdmin() || this.userService.userName() === blog.author) && !blog.release;
   }
 }

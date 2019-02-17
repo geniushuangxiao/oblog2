@@ -13,13 +13,14 @@
     <ng-template #contentTemplate>
       <div class="user-setting">
         <p *ngIf="user.isAdmin()" routerLink="/setting/menu">菜单设置</p>
+        <p *ngIf="user.authenticated()" (click)="user.logout()">退出登陆</p>
       </div>
     </ng-template>
   </a>
   <!-- 登陆用户的消息 -->
-  <a *ngIf="user.authenticated()">
+  <!-- <a *ngIf="user.authenticated()">
     <i nz-icon type="bell"></i> 10
-  </a>
+  </a> -->
 </ul>
 <app-top-nav-flyout (mouseleave)="mouseOut()" *ngIf="showFlyout()" [parentCategory]="mouseOverCategory" class="nav-flyout">
 </app-top-nav-flyout>

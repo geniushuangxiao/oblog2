@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Blog } from '../../dto/blog';
 import { NzMessageService } from 'ng-zorro-antd';
-import { HttpService } from '../../tools/http.service';
-import { UserService } from '../../tools/user.service';
+import { HttpService } from '../../service/http.service';
+import { UserService } from '../../service/user.service';
 
 
 @Injectable({

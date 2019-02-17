@@ -7,6 +7,8 @@ import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { MenuSettingComponent } from './setting/menu-setting/menu-setting.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
+import { RegisterComponent } from './user/register/register.component';
+import { RegisterActivateComponent } from './user/register-activate/register-activate.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'blogdetail/:id', component: BlogDetailComponent },
   { path: 'setting/menu/:id', component: MenuSettingComponent },
   { path: 'setting/menu', component: MenuSettingComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'registeractivate/:id', component: RegisterActivateComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
 
