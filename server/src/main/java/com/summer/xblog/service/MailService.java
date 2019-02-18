@@ -22,9 +22,9 @@ public class MailService {
         String url = env.getProperty("mail.send.url");
         String port = env.getProperty("server.port");
         if("80".equals(port)) {
-            message.setText(String.format("%s/#/register/activate/%s", url, random));
+            message.setText(String.format("%s/api/user/activate/%s", url, random));
         } else {
-            message.setText(String.format("%s:%s/#/register/activate/%s", url, port, random));
+            message.setText(String.format("%s:%s/api/user/activate/%s", url, port, random));
         }
         return this.send(message);
     }

@@ -13,8 +13,8 @@ export class BlogListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private blogListService: BlogListService,
-    private userService: UserService) {}
+    public blogListService: BlogListService,
+    public userService: UserService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

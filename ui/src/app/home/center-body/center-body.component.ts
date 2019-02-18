@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./center-body.component.css']
 })
 export class CenterBodyComponent implements OnInit {
-  constructor(private categoryService: CategoryService,
+  constructor(public categoryService: CategoryService,
     private router: Router) { }
 
   ngOnInit() {

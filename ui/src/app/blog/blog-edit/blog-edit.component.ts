@@ -32,7 +32,7 @@ export class BlogEditComponent implements OnInit {
     ]
   };
 
-  constructor(private blogEditService: BlogEditService,
+  constructor(public blogEditService: BlogEditService,
     private route: ActivatedRoute,
     private location: Location) { }
 

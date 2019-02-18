@@ -11,7 +11,7 @@ import { Category } from '../../dto/category';
 export class TopNavComponent implements OnInit {
   mouseOverCategory: Category;
 
-  constructor(private cagegoryServcie: CategoryService,
+  constructor(public cagegoryServcie: CategoryService,
     public user: UserService) { }
 
   ngOnInit() {

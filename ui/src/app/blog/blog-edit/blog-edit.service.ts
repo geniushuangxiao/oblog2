@@ -20,7 +20,7 @@ export class BlogEditService {
 
   init(pathVariable: any): void {
     this.blog = new Blog();
-    let regEx = /[0-9]+/;
+    let regEx = /^[0-9]*$/;
     if(regEx.test(pathVariable)) {//编辑
       this.queryBlog(pathVariable);
     } else {//新建
