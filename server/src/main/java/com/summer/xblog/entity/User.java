@@ -28,7 +28,7 @@ public class User implements UserDetails, CredentialsContainer {
     private String email;
     @NonNull
     private long registerTime;
-    @ManyToMany(targetEntity = UserAuthority.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = UserAuthority.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private Set<GrantedAuthority> authorities;
     private boolean accountNonExpired;
@@ -68,7 +68,7 @@ public class User implements UserDetails, CredentialsContainer {
     private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
         Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
         // Ensure array iteration order is predictable (as per
-        // UserDetails.getAuthorities() contract and SEC-717)
+        // UserDetails.getBlogAttachment() contract and SEC-717)
         SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<>(new AuthorityComparator());
 
         for (GrantedAuthority grantedAuthority : authorities) {

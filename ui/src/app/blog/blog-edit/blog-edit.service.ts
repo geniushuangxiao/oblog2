@@ -5,6 +5,7 @@ import { HttpService } from '../../service/http.service';
 import { UserService } from '../../service/user.service';
 import { Location } from '@angular/common';
 import { Blog } from '../../dto/blog';
+import { BlogAttachment } from 'src/app/dto/blog-attachment';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,22 @@ export class BlogEditService {
     this.http.post("blog", this.blog).subscribe(response => {
       if(response.success) {
         this.location.back();
+      } else {
+        this.message.error(response.message);
+      }
+    })
+  }
+
+  deleteFile(name) {
+    this.http.delete("file?filename=" + name).subscribe((response) => {
+      if(response.success) {
+        for(var i = 0; i < this.blog.blogAttachment.length; i ++) {
+          let attachment = this.blog.blogAttachment[i];
+          if(attachment.name === name) {
+            this.blog.blogAttachment.splice(i, 1);
+            return;
+          }
+        }
       } else {
         this.message.error(response.message);
       }

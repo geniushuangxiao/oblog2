@@ -34,7 +34,7 @@ export class BlogEditComponent implements OnInit {
 
   constructor(public blogEditService: BlogEditService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location) {}
 
   ngOnInit() {
     this.quillHeight.height = (window.innerHeight - 155) + 'px';
@@ -53,5 +53,15 @@ export class BlogEditComponent implements OnInit {
 
   cancle(): void {
     this.location.back();
+  }
+
+  deleteAttachment(attachment) {
+    return true;
+    // this.blogEditService.deleteFile(attachment);
+  }
+
+  fileStatusChange(abc) {
+    console.log(abc);
+    this.blogEditService.deleteFile(abc.file.name);
   }
 }

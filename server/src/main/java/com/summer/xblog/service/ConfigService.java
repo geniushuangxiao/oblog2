@@ -6,6 +6,7 @@ import com.summer.xblog.dto.CommonDTO;
 import com.summer.xblog.entity.ConfigEntity;
 import com.summer.xblog.tools.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +18,7 @@ public class ConfigService {
     @Autowired
     private ConfigReponsitory configReponsitory;
 
+    @Secured({"ROLE_ADMIN"})
     public CommonDTO saveCategory(List<Category> categories) {
         categories.forEach(item -> this.categoryPath(item, ""));
         Optional<ConfigEntity> optional = Category.toConfigEntity(categories);

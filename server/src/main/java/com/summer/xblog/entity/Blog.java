@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -33,4 +34,8 @@ public class Blog {
     private long lastModifyTime;
     /**查看次数*/
     private long viewNum;
+
+    @OneToMany(targetEntity = BlogAttachment.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "blogId")
+    private Set<BlogAttachment> blogAttachment;
 }

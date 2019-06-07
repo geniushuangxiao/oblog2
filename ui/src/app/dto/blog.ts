@@ -1,3 +1,4 @@
+import { BlogAttachment } from './blog-attachment';
 export class Blog {
     id: number;
     categoryId: string;
@@ -9,4 +10,5 @@ export class Blog {
     firstWriteTime: number;
     lastModifyTime: number;
     viewNum: number;
+    blogAttachment: Array<BlogAttachment>;
 }

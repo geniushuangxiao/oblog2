@@ -13,3 +13,12 @@
     <button nz-button nzType="danger" (click)="cancle()">取消</button>
   </div>
 </div>
+<nz-upload
+  nzAction="api/file"
+  [nzFileList]="blogEditService.blog.blogAttachment"
+  [nzRemove]="deleteAttachment"
+  (nzChange)="fileStatusChange($event)">
+  <button nz-button>
+    <i nz-icon type="upload"></i><span>上传</span>
+  </button>
+</nz-upload>

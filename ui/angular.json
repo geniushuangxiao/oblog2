@@ -28,6 +28,7 @@
               }
             ],
             "styles": [
+              "src/quill.snow.css",
               "src/theme.less",
               "src/styles.css"
             ],

@@ -1,39 +1,45 @@
 package com.summer.xblog.service;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.summer.xblog.dao.UserRepository;
 import com.summer.xblog.entity.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ActivateLinkCache {
     //缓存池大小
     private static final int CACHE_SIZE = 5000;
-    private static final int EXPIRE_TIME = 30 * 60 * 1000;
-    private Map<String, ActivateLink> links = new HashMap<>();
+    private static final int EXPIRE_TIME_MINUTES = 30;
+    private Cache<String, ActivateLink> cache = CacheBuilder.newBuilder()
+            .maximumSize(CACHE_SIZE)
+            .expireAfterWrite(EXPIRE_TIME_MINUTES, TimeUnit.MINUTES) // 设置缓存30分钟后失效
+            .concurrencyLevel(Runtime.getRuntime().availableProcessors()) //设置并发级别为cpu核心数
+            .recordStats() // 开启缓存统计
+            .build();
 
     @Autowired
     private UserRepository userRepository;
 
     public void push(User user, String random) {
-        links.put(random, ActivateLink.newInstance(user, random));
+        cache.put(random, ActivateLink.newInstance(user, random));
     }
 
     public ActivateLink get(String random) {
-        return links.get(random);
+        return cache.getIfPresent(random);
     }
 
     /**判断激活随机字符串是否已经存在*/
     boolean exists(String random) {
-        return links.get(random) != null;
+        return cache.getIfPresent(random) != null;
     }
 
     void remove(final ActivateLink link) {
-        links.remove(link.getRandom());
+        cache.invalidate(link.getRandom());
     }
 
     /**
@@ -41,24 +47,7 @@ public class ActivateLinkCache {
      * @return true表示存满
      */
     boolean full() {
-        return links.size() >= CACHE_SIZE;
-    }
-
-    /**
-     * 清除半小时未激活的注册
-     */
-    public void clean() {
-        long current = System.currentTimeMillis();
-        links.keySet().forEach(key -> {
-            final ActivateLink value = this.links.get(key);
-            boolean expired = (current - value.getRegisterTime()) > EXPIRE_TIME;
-            if(expired) {
-                //从数据库删除
-                this.userRepository.deleteById(value.getUserId());
-                //从缓存删除
-                this.remove(value);
-            }
-        });
+        return cache.size() >= CACHE_SIZE;
     }
 }
 @Data

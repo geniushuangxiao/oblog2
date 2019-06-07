@@ -3,8 +3,7 @@ package com.summer.xblog.service;
 import com.summer.xblog.dao.BlogRepository;
 import com.summer.xblog.dto.CommonDTO;
 import com.summer.xblog.entity.Blog;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,8 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class BlogService {
-    private static final Logger log = LoggerFactory.getLogger(BlogService.class);
     @Autowired
     private BlogRepository repository;
 
